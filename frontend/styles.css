@@ -1,0 +1,727 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Welcome Page Styles */
+.welcome-section {
+    text-align: center;
+    padding: 80px 20px;
+    color: white;
+}
+
+.welcome-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.welcome-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.features-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.feature-card i {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #4CAF50;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-primary {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: #333;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+}
+
+.btn-outline:hover {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.btn-large {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
+
+/* Auth Page Styles */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.auth-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-header h1 {
+    color: #4CAF50;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.auth-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #666;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    color: #4CAF50;
+    border-bottom-color: #4CAF50;
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.error-message {
+    color: #f44336;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: none;
+}
+
+.welcome-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.back-link {
+    color: #4CAF50;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #45a049;
+}
+
+/* Meditation Library Styles */
+.meditation-container {
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.meditation-header {
+    background: #4CAF50;
+    color: white;
+    padding: 30px 0;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-left i {
+    font-size: 2rem;
+    color: #FFD700;
+}
+
+.header-left h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+.header-right {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.header-subtitle {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.filters-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-weight: 500;
+    color: #333;
+}
+
+.filter-group select {
+    padding: 10px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    min-width: 200px;
+}
+
+.meditation-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.meditation-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.meditation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-content {
+    padding: 25px;
+}
+
+.card-title {
+    color: #4CAF50;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.card-description {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.audio-player {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.play-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.play-btn:hover {
+    background: #45a049;
+}
+
+.progress-container {
+    flex: 1;
+    min-width: 150px;
+}
+
+.progress-bar {
+    background: #e0e0e0;
+    height: 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+}
+
+.progress {
+    background: #4CAF50;
+    height: 100%;
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+.time-display {
+    color: #666;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.volume-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.volume-slider {
+    width: 80px;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #4CAF50;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Audio Modal Styles */
+.audio-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+.modal-header {
+    background: #4CAF50;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.audio-player audio {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Preferences Page Styles */
+.preferences-container {
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.preferences-header {
+    background: #4CAF50;
+    color: white;
+    padding: 20px 0;
+}
+
+.preferences-header .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preferences-header .header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.back-btn {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.preferences-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.preferences-form {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+    margin-bottom: 40px;
+}
+
+.form-section h3 {
+    color: #4CAF50;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.checkbox-group, .radio-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.checkbox-label, .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.checkbox-label:hover, .radio-label:hover {
+    background: #f8f9fa;
+}
+
+.checkbox-label input, .radio-label input {
+    display: none;
+}
+
+.checkmark, .radio-mark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.radio-mark {
+    border-radius: 50%;
+}
+
+.checkbox-label input:checked + .checkmark {
+    background: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.checkbox-label input:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.radio-label input:checked + .radio-mark {
+    background: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.radio-label input:checked + .radio-mark::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+}
+
+.select-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* Loading and No Results */
+.loading, .no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+}
+
+.loading i, .no-results i {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #4CAF50;
+}
+
+.no-results i {
+    color: #ccc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .welcome-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .meditation-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filters-section {
+        flex-direction: column;
+    }
+    
+    .filter-group select {
+        min-width: 100%;
+    }
+    
+    .checkbox-group, .radio-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .preferences-form {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 20px;
+    }
+    
+    .welcome-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}

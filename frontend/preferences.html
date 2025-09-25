@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Meditation Preferences - Serenity</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="preferences-container">
+        <header class="preferences-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <a href="meditation.html" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <h1>Your Meditation Preferences</h1>
+                </div>
+                <div class="header-right">
+                    <a href="meditation.html" class="btn btn-outline">
+                        <i class="fas fa-play"></i> Meditation
+                    </a>
+                    <a href="index.html" class="btn btn-outline">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </div>
+            </div>
+        </header>
+        
+        <div class="preferences-content">
+            <form id="preferencesForm" class="preferences-form">
+                <div class="form-section">
+                    <h3>Select Your Favorite Themes:</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="favoriteThemes" value="Mindfulness">
+                            <span class="checkmark"></span>
+                            Mindfulness
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="favoriteThemes" value="Sleep">
+                            <span class="checkmark"></span>
+                            Sleep
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="favoriteThemes" value="Focus & Clarity">
+                            <span class="checkmark"></span>
+                            Focus & Clarity
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="favoriteThemes" value="Stress Relief">
+                            <span class="checkmark"></span>
+                            Stress Relief
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="favoriteThemes" value="Gratitude">
+                            <span class="checkmark"></span>
+                            Gratitude
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="favoriteThemes" value="Chakra Balancing">
+                            <span class="checkmark"></span>
+                            Chakra Balancing
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Preferred Duration:</h3>
+                    <div class="select-group">
+                        <select name="preferredDuration" id="preferredDuration">
+                            <option value="5 minutes">5 minutes</option>
+                            <option value="10 minutes">10 minutes</option>
+                            <option value="15 minutes">15 minutes</option>
+                            <option value="20 minutes">20 minutes</option>
+                            <option value="30 minutes">30 minutes</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3>Best Time of Day:</h3>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="bestTimeOfDay" value="Morning">
+                            <span class="radio-mark"></span>
+                            Morning
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="bestTimeOfDay" value="Afternoon">
+                            <span class="radio-mark"></span>
+                            Afternoon
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="bestTimeOfDay" value="Evening">
+                            <span class="radio-mark"></span>
+                            Evening
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="bestTimeOfDay" value="Night">
+                            <span class="radio-mark"></span>
+                            Night
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <i class="fas fa-save"></i> Save Preferences
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="loading" id="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading your preferences...</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditation Library - Serenity</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="meditation-container">
+        <header class="meditation-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <i class="fas fa-star"></i>
+                    <h1>Meditation Library</h1>
+                </div>
+                <div class="header-right">
+                    <a href="preferences.html" class="btn btn-outline">
+                        <i class="fas fa-cog"></i> Preferences
+                    </a>
+                    <a href="index.html" class="btn btn-outline">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </div>
+            </div>
+            <p class="header-subtitle">Choose your moment of peace</p>
+        </header>
+        
+        <div class="filters-section">
+            <div class="filter-group">
+                <label for="categoryFilter">Category:</label>
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="Morning Calm">Morning Calm</option>
+                    <option value="Stress Relief">Stress Relief</option>
+                    <option value="Sleep Journey">Sleep Journey</option>
+                    <option value="Focus & Clarity">Focus & Clarity</option>
+                    <option value="Mindfulness">Mindfulness</option>
+                    <option value="Gratitude">Gratitude</option>
+                    <option value="Chakra Balancing">Chakra Balancing</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="durationFilter">Duration:</label>
+                <select id="durationFilter">
+                    <option value="">All Durations</option>
+                    <option value="5">5 minutes</option>
+                    <option value="10">10 minutes</option>
+                    <option value="15">15 minutes</option>
+                    <option value="20">20 minutes</option>
+                    <option value="30">30 minutes</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="meditation-grid" id="meditationGrid">
+            <!-- Meditation cards will be loaded here -->
+        </div>
+        
+        <div class="loading" id="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading meditation sessions...</p>
+        </div>
+        
+        <div class="no-results" id="noResults" style="display: none;">
+            <i class="fas fa-search"></i>
+            <p>No meditation sessions found matching your criteria</p>
+        </div>
+    </div>
+    
+    <!-- Audio Player Modal -->
+    <div class="audio-modal" id="audioModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Meditation Session</h3>
+                <button class="close-btn" onclick="closeAudioModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="audio-player">
+                    <audio id="audioPlayer" controls>
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="player-controls">
+                        <button class="play-btn" id="playBtn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progressBar">
+                                <div class="progress" id="progress"></div>
+                            </div>
+                        </div>
+                        <div class="time-display">
+                            <span id="currentTime">0:00</span>
+                            <span>/</span>
+                            <span id="duration">0:00</span>
+                        </div>
+                        <button class="volume-btn" id="volumeBtn">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
