@@ -1,8 +1,33 @@
 // Global variables
 let currentMeditations = [];
+let currentUser = null;
+let authToken = localStorage.getItem('authToken');
 
 // API Base URL - dynamically use the same port as the server
 const API_BASE = `${window.location.protocol}//${window.location.host}/api`;
+
+// Authentication helper functions
+function getAuthHeaders() {
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+    };
+}
+
+function isAuthenticated() {
+    return authToken !== null;
+}
+
+function setAuthToken(token) {
+    authToken = token;
+    localStorage.setItem('authToken', token);
+}
+
+function clearAuth() {
+    authToken = null;
+    localStorage.removeItem('authToken');
+    currentUser = null;
+}
 
 // Utility functions
 function showError(message) {
@@ -22,12 +47,82 @@ function formatTime(seconds) {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
+// Authentication functions
+async function registerUser(username, email, password) {
+    try {
+        showLoading(true);
+        const response = await fetch(`${API_BASE}/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            setAuthToken(data.token);
+            currentUser = data.user;
+            return { success: true, message: data.message };
+        } else {
+            return { success: false, message: data.message };
+        }
+    } catch (error) {
+        console.error('Registration error:', error);
+        return { success: false, message: 'Network error. Please try again.' };
+    } finally {
+        showLoading(false);
+    }
+}
+
+async function loginUser(email, password) {
+    try {
+        showLoading(true);
+        const response = await fetch(`${API_BASE}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            setAuthToken(data.token);
+            currentUser = data.user;
+            return { success: true, message: data.message };
+        } else {
+            return { success: false, message: data.message };
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        return { success: false, message: 'Network error. Please try again.' };
+    } finally {
+        showLoading(false);
+    }
+}
+
+function logoutUser() {
+    clearAuth();
+    window.location.href = 'login.html';
+}
+
 // Simple navigation functions
 function goToMeditation() {
+    if (!isAuthenticated()) {
+        window.location.href = 'login.html';
+        return;
+    }
     window.location.href = 'meditation.html';
 }
 
 function goToPreferences() {
+    if (!isAuthenticated()) {
+        window.location.href = 'login.html';
+        return;
+    }
     window.location.href = 'preferences.html';
 }
 
@@ -219,11 +314,26 @@ function filterMeditations() {
 
 // Preferences functions
 async function loadPreferences() {
+    if (!isAuthenticated()) {
+        showError('Please login to view preferences');
+        window.location.href = 'login.html';
+        return;
+    }
+
     try {
         showLoading(true);
-        const response = await fetch(`${API_BASE}/preferences`);
-        const data = await response.json();
+        const response = await fetch(`${API_BASE}/preferences`, {
+            headers: getAuthHeaders()
+        });
 
+        if (response.status === 401) {
+            clearAuth();
+            showError('Session expired. Please login again.');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        const data = await response.json();
         populatePreferencesForm(data);
     } catch (error) {
         console.error('Load preferences error:', error);
@@ -254,14 +364,25 @@ function populatePreferencesForm(preferences) {
 }
 
 async function savePreferences(formData) {
+    if (!isAuthenticated()) {
+        showError('Please login to save preferences');
+        window.location.href = 'login.html';
+        return;
+    }
+
     try {
         const response = await fetch(`${API_BASE}/preferences`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: getAuthHeaders(),
             body: JSON.stringify(formData),
         });
+
+        if (response.status === 401) {
+            clearAuth();
+            showError('Session expired. Please login again.');
+            window.location.href = 'login.html';
+            return;
+        }
 
         const data = await response.json();
         alert('Preferences saved successfully!');
@@ -273,6 +394,19 @@ async function savePreferences(formData) {
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', function() {
+    // Check authentication on protected pages
+    if (window.location.pathname.includes('meditation') || window.location.pathname.includes('preferences')) {
+        if (!isAuthenticated()) {
+            window.location.href = 'login.html';
+            return;
+        }
+    }
+
+    // Login page
+    if (window.location.pathname.includes('login')) {
+        setupAuthForms();
+    }
+
     // Meditation page
     if (window.location.pathname.includes('meditation')) {
         loadMeditations();
@@ -292,7 +426,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const preferences = {
                     favoriteThemes: Array.from(document.querySelectorAll('input[name="favoriteThemes"]:checked')).map(cb => cb.value),
                     preferredDuration: formData.get('preferredDuration'),
-                    bestTimeOfDay: formData.get('bestTimeOfDay')
+                    bestTimeOfDay: formData.get('bestTimeOfDay'),
+                    notifications: formData.get('notifications') === 'on',
+                    theme: formData.get('theme')
                 };
                 
                 await savePreferences(preferences);
@@ -300,6 +436,47 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+function setupAuthForms() {
+    // Login form
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(loginForm);
+            const email = formData.get('email');
+            const password = formData.get('password');
+            
+            const result = await loginUser(email, password);
+            if (result.success) {
+                alert(result.message);
+                window.location.href = 'meditation.html';
+            } else {
+                showError(result.message);
+            }
+        });
+    }
+
+    // Register form
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm) {
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(registerForm);
+            const username = formData.get('username');
+            const email = formData.get('email');
+            const password = formData.get('password');
+            
+            const result = await registerUser(username, email, password);
+            if (result.success) {
+                alert(result.message);
+                window.location.href = 'meditation.html';
+            } else {
+                showError(result.message);
+            }
+        });
+    }
+}
 
 // Close modal when clicking outside
 document.addEventListener('click', (e) => {
