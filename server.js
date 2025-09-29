@@ -1,6 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const connectDB = require('./config/database');
+
+// Import routes
+const authRoutes = require('./routes/auth');
+const preferencesRoutes = require('./routes/preferences');
+
+// Connect to MongoDB
+connectDB();
 
 const app = express();
 
@@ -8,6 +17,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'frontend')));
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/preferences', preferencesRoutes);
 
 // Sample meditation data (in-memory storage)
 const meditations = [
@@ -61,12 +74,7 @@ const meditations = [
     }
 ];
 
-// Simple user preferences storage (in-memory)
-let userPreferences = {
-    favoriteThemes: [],
-    preferredDuration: "10 minutes",
-    bestTimeOfDay: "Morning"
-};
+// Simple user preferences storage removed - now using MongoDB with authentication
 
 // API Routes
 app.get('/api/meditation', (req, res) => {
@@ -92,19 +100,7 @@ app.get('/api/meditation/:id', (req, res) => {
     res.json(meditation);
 });
 
-app.get('/api/preferences', (req, res) => {
-    res.json(userPreferences);
-});
-
-app.put('/api/preferences', (req, res) => {
-    const { favoriteThemes, preferredDuration, bestTimeOfDay } = req.body;
-    
-    if (favoriteThemes !== undefined) userPreferences.favoriteThemes = favoriteThemes;
-    if (preferredDuration !== undefined) userPreferences.preferredDuration = preferredDuration;
-    if (bestTimeOfDay !== undefined) userPreferences.bestTimeOfDay = bestTimeOfDay;
-
-    res.json(userPreferences);
-});
+// Preferences routes moved to /routes/preferences.js with authentication
 
 // Serve static files
 app.get('/', (req, res) => {
@@ -123,7 +119,7 @@ app.get('/preferences', (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend', 'preferences.html'));
 });
 
-const PORT = process.env.PORT || 3006;
+const PORT = process.env.PORT || 3008;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     console.log(`Visit: http://localhost:${PORT}`);

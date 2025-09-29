@@ -1,8 +1,8 @@
 // Global variables
 let currentMeditations = [];
 
-// API Base URL
-const API_BASE = 'http://localhost:5000/api';
+// API Base URL - dynamically use the same port as the server
+const API_BASE = `${window.location.protocol}//${window.location.host}/api`;
 
 // Utility functions
 function showError(message) {
